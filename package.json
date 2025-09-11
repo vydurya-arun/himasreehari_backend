@@ -1,0 +1,24 @@
+{
+  "name": "himasreehari_backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vydurya-arun/himasreehari_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vydurya-arun/himasreehari_backend/issues"
+  },
+  "homepage": "https://github.com/vydurya-arun/himasreehari_backend#readme",
+  "description": "",
+  "dependencies": {
+    "mongoose": "^8.18.1"
+  }
+}
