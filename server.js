@@ -3,12 +3,11 @@ import cors from 'cors';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 import connectDB from './src/config/mongodb.js';
-import authRouter from './src/route/authRoute.js';
-import productRouter from './src/route/productRoute.js';
+import authRouter from './src/routes/authRoute.js';
 import bodyParser from 'body-parser';
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4010;
 connectDB();
 
 
@@ -23,7 +22,7 @@ app.use(cors({
 //API ENDpoints
 
 app.use('/api/auth', authRouter);
-app.use('/api/product', productRouter);
+
 
 
 app.get('/', (req,res) => res.send('welcome to Backend'));
