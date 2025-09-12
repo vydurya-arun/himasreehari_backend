@@ -1,7 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import streamifier from "streamifier";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 cloudinary.config({
@@ -9,6 +8,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
 
 export const uploadToCloudinary = (buffer, folder = "himasree_files") => {
   return new Promise((resolve, reject) => {
