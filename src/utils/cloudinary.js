@@ -10,7 +10,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadToCloudinary = (buffer, folder = "dev_trades") => {
+export const uploadToCloudinary = (buffer, folder = "himasree_files") => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
