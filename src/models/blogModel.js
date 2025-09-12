@@ -21,12 +21,12 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    des: {
+    description: {
         type: String,
         required: true
     },
     date: {
-        type: String,
+        type: Date,
         required: true
     },
     isActive:{
