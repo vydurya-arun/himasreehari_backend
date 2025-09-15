@@ -6,11 +6,12 @@ import { authMiddleware } from '../middileware/authMiddleware.js';
 
 const blogRouter = express.Router();
 
-blogRouter.post('/',upload.single("file"), createBlog);
+blogRouter.post('/',authMiddleware,upload.single("file"), createBlog);
 blogRouter.get('/',authMiddleware,getAllBlogs);
-blogRouter.get('/:id',getBlogById);
-blogRouter.delete('/:id',deleteBlogById);
-blogRouter.delete('/',deleteAllBlogs);
-blogRouter.put('/:id',upload.single("file"),updateBlog);
+blogRouter.get('/public',getAllBlogs);
+blogRouter.get('/:id',authMiddleware,getBlogById);
+blogRouter.delete('/:id',authMiddleware,deleteBlogById);
+blogRouter.delete('/',authMiddleware,deleteAllBlogs);
+blogRouter.put('/:id',authMiddleware,upload.single("file"),updateBlog);
 
 export default blogRouter;

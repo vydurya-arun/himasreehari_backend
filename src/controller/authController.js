@@ -227,3 +227,35 @@ export const refresh = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+// ✅ Get current user (protected)
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find()
+      .select("-password") 
+      .sort({ createdAt: -1 });
+
+    if (!users || users.length === 0) {
+      return res.status(404).json({ success: false, error: "No users found" });
+    }
+
+    res.status(200).json({ success: true, data: users });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Server error" });
+  }
+};
+
+export const deleteUsers = async (req, res) => {
+  try {
+    const users = await userModel.findByIdAndDelete(req.params.id);
+
+    if (!users) {
+      return res.status(404).json({ success: false, error: "user not found" });
+    }
+
+    res.status(200).json({ success: true, message: "user deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, error: "Server error" });
+  }
+};
