@@ -98,14 +98,14 @@ export const login = async (req, res) => {
 
     // Access token (short-lived)
     const accessToken = jwt.sign(
-      { id: user._id, email: user.email, jti: tokenId },
+      { id: user._id, email: user.email,username:user.username,role:user.role, jti: tokenId },
       process.env.JWT_SECRET,
       { expiresIn: process.env.ACCESS_TOKEN_EXPIRE || "5m" }
     );
 
     // Refresh token (long-lived, includes jti)
     const refreshToken = jwt.sign(
-      { id: user._id, email: user.email },
+      { id: user._id, email: user.email,username:user.username,role:user.role },
       process.env.REFRESH_TOKEN,
       { expiresIn: process.env.REFRESH_TOKEN_EXPIRE || "7d" }
     );
@@ -208,7 +208,7 @@ export const refresh = async (req, res) => {
 
       // Generate new access token
       const newAccessToken = jwt.sign(
-        { id: decoded.id, email: decoded.email,jti: session.tokenId },
+        { id: decoded.id, email: decoded.email,username:decoded.username,role:decoded.role,jti: session.tokenId },
         process.env.JWT_SECRET,
         { expiresIn: process.env.ACCESS_TOKEN_EXPIRE || "5m" }
       );
