@@ -7,12 +7,12 @@ export const createBlog = async(req, res) =>{
         
 
         if(!title || !description || !tag|| !date){
-            return res.send(400).json({success:false,message:"invalid Field"})
+            return res.send(404).json({success:false,message:"invalid Field"})
         }
 
         // ✅ Ensure image is uploaded (because schema requires it)
         if (!req.file) {
-        return res.status(400).json({
+        return res.status(404).json({
             success: false,
             message: "Image is required",
         });
@@ -40,7 +40,7 @@ export const getAllBlogs = async(req,res) =>{
     try {
         const blogs = await blogModel.find();
         if(!blogs){
-            return res.status(400).json({success:false, message:"Not found any Blogs"})
+            return res.status(404).json({success:false, message:"Not found any Blogs"})
         }
         const count = blogs.length;
         return res.status(200).json({success:true, data:blogs,counts:count})

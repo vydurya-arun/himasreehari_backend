@@ -12,7 +12,7 @@ export const register = async (req, res) => {
     });
 
     if (error) {
-      return res.status(400).json({
+      return res.status(406).json({
         success: false,
         errors: error.details.map((err) => err.message),
       });
@@ -20,7 +20,7 @@ export const register = async (req, res) => {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
-      return res.status(401).json({
+      return res.status(404).json({
         success: false,
         message: "Missing username,email or password",
       });
@@ -30,7 +30,7 @@ export const register = async (req, res) => {
 
     if (existUser) {
       return res
-        .status(401)
+        .status(404)
         .json({ success: false, message: "user already exist" });
     }
 
@@ -57,7 +57,7 @@ export const login = async (req, res) => {
 
     if (!email || !password) {
       return res
-        .status(400)
+        .status(404)
         .json({ success: false, message: "Missing email or password" });
     }
 
@@ -65,7 +65,7 @@ export const login = async (req, res) => {
     const user = await userModel.findOne({ email });
     if (!user) {
       return res
-        .status(401)
+        .status(404)
         .json({ success: false, message: "User does not exist" });
     }
 
@@ -73,7 +73,7 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res
-        .status(401)
+        .status(404)
         .json({ success: false, message: "Invalid password" });
     }
 
@@ -194,7 +194,7 @@ export const refresh = async (req, res) => {
     const session = await sessionModel.findOne({ refreshToken, valid: true });
     if (!session) {
       return res
-        .status(403)
+        .status(404)
         .json({ success: false, message: "Invalid or expired session" });
     }
 
