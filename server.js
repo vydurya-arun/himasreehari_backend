@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './src/config/mongodb.js';
 import authRouter from './src/routes/authRoute.js';
 import blogRouter from './src/routes/blogRoute.js';
+import resumeRouter from './src/routes/resumeRoute.js';
 import bodyParser from 'body-parser';
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(cors({
 
 app.use('/api/auth', authRouter);
 app.use('/api/blog', blogRouter);
+app.use('/api/resume', resumeRouter);
 
 
 
