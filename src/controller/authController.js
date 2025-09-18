@@ -119,14 +119,14 @@ export const login = async (req, res) => {
     // Set cookies
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 5 * 60 * 1000, // 5 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
@@ -161,13 +161,13 @@ export const logout = async (req, res) => {
     // Clear cookies
     res.clearCookie("accessToken", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     });
 
     res.clearCookie("refreshToken", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     });
 
@@ -216,7 +216,7 @@ export const refresh = async (req, res) => {
       // Update access token cookie
       res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
         maxAge: 5 * 60 * 1000, // 5 minutes
       });
